@@ -27,7 +27,15 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
     res.json(users);
 });
-
+router.get('/:id', (req, res) => {
+    const { id } = req.params;
+    const user = users.find((user) => user.id === id);
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(404).send('User not found');
+    }
+});
 // DELETE route to remove a user by id
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
